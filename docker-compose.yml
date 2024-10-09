@@ -1,0 +1,18 @@
+services:
+  web:
+    image: nginx:latest
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+    ports:
+      - "${WEB_PORT:-80}:80"
+
+  db:
+    image: postgres:latest
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+    environment:
+      POSTGRES_PASSWORD: example
